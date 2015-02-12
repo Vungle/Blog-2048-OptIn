@@ -61,8 +61,14 @@
   
   _scene = scene;
   _scene.controller = self;
+	
+	[[VungleSDK sharedSDK] setDelegate:self];
 }
 
+
+- (void)viewDidAppear:(BOOL)animated {
+	_settingsButton.alpha = [self isSettingsUnlocked] ? 1.0 : 0.5;
+}
 
 - (void)updateState
 {
@@ -71,7 +77,7 @@
   
   _restartButton.backgroundColor = [GSTATE buttonColor];
   _restartButton.titleLabel.font = [UIFont fontWithName:[GSTATE boldFontName] size:14];
-  
+	
   _settingsButton.backgroundColor = [GSTATE buttonColor];
   _settingsButton.titleLabel.font = [UIFont fontWithName:[GSTATE boldFontName] size:14];
   
@@ -112,22 +118,36 @@
   }
 }
 
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-  // Pause Sprite Kit. Otherwise the dismissal of the modal view would lag.
-  ((SKView *)self.view).paused = YES;
+- (IBAction)settingsTapped:(id)sender {
+	if ([self isSettingsUnlocked]) {
+		// Pause Sprite Kit. Otherwise the dismissal of the modal view would lag.
+		((SKView *)self.view).paused = YES;
+		//Navigate to Advanced Settings
+		[self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"settingsNav"] animated:YES completion:nil];
+	} else {
+		//Present the user with a dialog allowing them to opt-in to an ad view in order to unlock advanced settings for a day
+		//If the user doesn't want to unlock settings through an incentivized view, let simply dismiss the alert
+		UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+			NSLog(@"The user chose to leave settings locked");
+		}];
+		
+		//If the user chooses to watch an ad, play an incentivized ad for them
+		UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self playIncentivizedAd];
+		}];
+		UIAlertController *unlockAlert = [UIAlertController alertControllerWithTitle:@"Unlock Settings?" message:@"Unlock advanced settings for 24 hours with a short video?" preferredStyle:UIAlertControllerStyleAlert];
+		[unlockAlert addAction:cancel];
+		[unlockAlert addAction:okAction];
+		
+		[self presentViewController:unlockAlert animated:YES completion:nil];
+	}
 }
-
 
 - (IBAction)restart:(id)sender
 {
     //Monetize here!
-    VungleSDK *sdk = [VungleSDK sharedSDK];
-    if([sdk isCachedAdAvailable]) {
-        [sdk playAd:self error:nil];
-    }
-    
+	[self playVideoAd];
+	
     //Reset the game for another round
     [self hideOverlay];
     [self updateScore:0];
@@ -204,7 +224,49 @@
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
-  // Release any cached data, images, etc that aren't in use.
+	//Clear the VungleDelegate in the VungleSDK
+	[[VungleSDK sharedSDK] setDelegate:nil];
+}
+
+- (BOOL)isSettingsUnlocked {
+	return [Settings integerForKey:@"settingsUnlockedTimestamp"] > ([NSDate timeIntervalSinceReferenceDate] - (60 * 60 * 24));
+}
+
+#pragma mark - Vungle Helper Methods
+
+- (void)playIncentivizedAd {
+	//Create a custom set of ad options for incentivized ads
+	NSMutableDictionary *playAdOptions = [[NSMutableDictionary alloc] init];
+	//Marks this play as an incentivized view
+	[playAdOptions setObject:[NSNumber numberWithBool:YES] forKey:VunglePlayAdOptionKeyIncentivized];
+	
+	NSError *sdkError;
+	[[VungleSDK sharedSDK] playAd:self withOptions:playAdOptions error:&sdkError];
+	if (sdkError) {
+		NSLog(@"Error encountered during playAd : %@", sdkError);
+	}
+}
+
+- (void)playVideoAd {
+	NSError *sdkError;
+	if([[VungleSDK sharedSDK] isCachedAdAvailable]) {
+		[[VungleSDK sharedSDK] playAd:self error:&sdkError];
+		if (sdkError) {
+			NSLog(@"Error encountered during playAd : %@", sdkError);
+		}
+	}
+}
+
+#pragma mark - VungleSDKDelegate
+
+- (void)vungleSDKwillCloseAdWithViewInfo:(NSDictionary *)viewInfo willPresentProductSheet:(BOOL)willPresentProductSheet {
+	//Verify that the view was completed before rewarding the user
+	BOOL completedView = [[viewInfo valueForKey:@"completedView"] boolValue];
+	if (completedView) {
+		//View was successfully completed!  Update NSUserDefaults to unlock advanced settings
+		NSInteger timestamp = [NSDate timeIntervalSinceReferenceDate];
+		[Settings setInteger:timestamp forKey:@"settingsUnlockedTimestamp"];
+	}
 }
 
 @end

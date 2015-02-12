@@ -34,6 +34,13 @@
 		24C4517018DFF10B0001FCFD /* M2ScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C4516F18DFF10B0001FCFD /* M2ScoreView.m */; };
 		24C4517318E140AE0001FCFD /* M2SettingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C4517218E140AE0001FCFD /* M2SettingsDetailViewController.m */; };
 		24C4518118E265390001FCFD /* M2Overlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C4518018E265390001FCFD /* M2Overlay.m */; };
+		DE0A2CE01A8BCDBF0037F9CF /* __vungle.db in Resources */ = {isa = PBXBuildFile; fileRef = DE0A2CD91A8BCDBF0037F9CF /* __vungle.db */; };
+		DE0A2CE11A8BCDBF0037F9CF /* vg_close.png in Resources */ = {isa = PBXBuildFile; fileRef = DE0A2CDA1A8BCDBF0037F9CF /* vg_close.png */; };
+		DE0A2CE21A8BCDBF0037F9CF /* vg_cta.png in Resources */ = {isa = PBXBuildFile; fileRef = DE0A2CDB1A8BCDBF0037F9CF /* vg_cta.png */; };
+		DE0A2CE31A8BCDBF0037F9CF /* vg_mute_off.png in Resources */ = {isa = PBXBuildFile; fileRef = DE0A2CDC1A8BCDBF0037F9CF /* vg_mute_off.png */; };
+		DE0A2CE41A8BCDBF0037F9CF /* vg_mute_on.png in Resources */ = {isa = PBXBuildFile; fileRef = DE0A2CDD1A8BCDBF0037F9CF /* vg_mute_on.png */; };
+		DE0A2CE51A8BCDBF0037F9CF /* vg_timer.png in Resources */ = {isa = PBXBuildFile; fileRef = DE0A2CDE1A8BCDBF0037F9CF /* vg_timer.png */; };
+		DE0A2CE61A8BCDBF0037F9CF /* VungleSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0A2CDF1A8BCDBF0037F9CF /* VungleSDK.framework */; };
 		DE9436BB1A604C0100FA1811 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE9436BA1A604C0100FA1811 /* AdSupport.framework */; };
 		DE9436BD1A604C4800FA1811 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE9436BC1A604C4800FA1811 /* AudioToolbox.framework */; };
 		DE9436BF1A604C4F00FA1811 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE9436BE1A604C4F00FA1811 /* AVFoundation.framework */; };
@@ -103,6 +110,13 @@
 		24C4517218E140AE0001FCFD /* M2SettingsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2SettingsDetailViewController.m; sourceTree = "<group>"; };
 		24C4517F18E265390001FCFD /* M2Overlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2Overlay.h; sourceTree = "<group>"; };
 		24C4518018E265390001FCFD /* M2Overlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2Overlay.m; sourceTree = "<group>"; };
+		DE0A2CD91A8BCDBF0037F9CF /* __vungle.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = __vungle.db; sourceTree = "<group>"; };
+		DE0A2CDA1A8BCDBF0037F9CF /* vg_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_close.png; sourceTree = "<group>"; };
+		DE0A2CDB1A8BCDBF0037F9CF /* vg_cta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_cta.png; sourceTree = "<group>"; };
+		DE0A2CDC1A8BCDBF0037F9CF /* vg_mute_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_mute_off.png; sourceTree = "<group>"; };
+		DE0A2CDD1A8BCDBF0037F9CF /* vg_mute_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_mute_on.png; sourceTree = "<group>"; };
+		DE0A2CDE1A8BCDBF0037F9CF /* vg_timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_timer.png; sourceTree = "<group>"; };
+		DE0A2CDF1A8BCDBF0037F9CF /* VungleSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VungleSDK.framework; sourceTree = "<group>"; };
 		DE9436BA1A604C0100FA1811 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		DE9436BC1A604C4800FA1811 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DE9436BE1A604C4F00FA1811 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -121,8 +135,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE9436BB1A604C0100FA1811 /* AdSupport.framework in Frameworks */,
 				DE9436BD1A604C4800FA1811 /* AudioToolbox.framework in Frameworks */,
+				DE9436BB1A604C0100FA1811 /* AdSupport.framework in Frameworks */,
+				DE0A2CE61A8BCDBF0037F9CF /* VungleSDK.framework in Frameworks */,
 				DE9436BF1A604C4F00FA1811 /* AVFoundation.framework in Frameworks */,
 				DE9436C11A604C5500FA1811 /* CFNetwork.framework in Frameworks */,
 				2443DC5818D662CA00C920C1 /* CoreGraphics.framework in Frameworks */,
@@ -174,6 +189,7 @@
 		2443DC5418D662CA00C920C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE0A2CD71A8BCDBF0037F9CF /* VungleSDK.embeddedframework */,
 				DE9436CE1A604C9800FA1811 /* SystemConfiguration.framework */,
 				DE9436CC1A604C9000FA1811 /* StoreKit.framework */,
 				DE9436CA1A604C8500FA1811 /* QuartzCore.framework */,
@@ -310,6 +326,28 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DE0A2CD71A8BCDBF0037F9CF /* VungleSDK.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				DE0A2CD81A8BCDBF0037F9CF /* Resources */,
+				DE0A2CDF1A8BCDBF0037F9CF /* VungleSDK.framework */,
+			);
+			path = VungleSDK.embeddedframework;
+			sourceTree = "<group>";
+		};
+		DE0A2CD81A8BCDBF0037F9CF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DE0A2CD91A8BCDBF0037F9CF /* __vungle.db */,
+				DE0A2CDA1A8BCDBF0037F9CF /* vg_close.png */,
+				DE0A2CDB1A8BCDBF0037F9CF /* vg_cta.png */,
+				DE0A2CDC1A8BCDBF0037F9CF /* vg_mute_off.png */,
+				DE0A2CDD1A8BCDBF0037F9CF /* vg_mute_on.png */,
+				DE0A2CDE1A8BCDBF0037F9CF /* vg_timer.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -390,8 +428,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE0A2CE51A8BCDBF0037F9CF /* vg_timer.png in Resources */,
+				DE0A2CE31A8BCDBF0037F9CF /* vg_mute_off.png in Resources */,
 				2443DC6218D662CA00C920C1 /* InfoPlist.strings in Resources */,
 				2443DC7518D662CA00C920C1 /* Images.xcassets in Resources */,
+				DE0A2CE01A8BCDBF0037F9CF /* __vungle.db in Resources */,
+				DE0A2CE41A8BCDBF0037F9CF /* vg_mute_on.png in Resources */,
+				DE0A2CE21A8BCDBF0037F9CF /* vg_cta.png in Resources */,
+				DE0A2CE11A8BCDBF0037F9CF /* vg_close.png in Resources */,
 				2443DC6B18D662CA00C920C1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,6 +598,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/VungleSDK.embeddedframework",
+					/Users/mikecox/Downloads/VungleSDK.embeddedframework,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "m2048/m2048-Prefix.pch";
@@ -573,6 +618,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/VungleSDK.embeddedframework",
+					/Users/mikecox/Downloads/VungleSDK.embeddedframework,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "m2048/m2048-Prefix.pch";

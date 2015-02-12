@@ -14,11 +14,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSString* appID = @"Your App ID Goes Here!";
+    NSString* appID = @"54b437a90aa247d92d00006d";
     VungleSDK* sdk = [VungleSDK sharedSDK];
     // start vungle publisher library
     [sdk startWithAppId:appID];
     [sdk setLoggingEnabled:YES];
+	[Settings removeObjectForKey:@"settingsUnlockedTimestamp"];
     return YES;
 }
 
