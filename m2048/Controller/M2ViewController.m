@@ -67,7 +67,14 @@
 
 
 - (void)viewDidAppear:(BOOL)animated {
-	_settingsButton.alpha = [self isSettingsUnlocked] ? 1.0 : 0.5;
+	if ([self isSettingsUnlocked]) {
+		[_settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
+		_settingsButton.alpha = 1.0;
+	} else {
+		[_settingsButton setTitle:@"Unlock?" forState:UIControlStateNormal];
+		_settingsButton.alpha = 0.5;
+	}
+	
 }
 
 - (void)updateState
@@ -229,7 +236,8 @@
 }
 
 - (BOOL)isSettingsUnlocked {
-	return [Settings integerForKey:@"settingsUnlockedTimestamp"] > ([NSDate timeIntervalSinceReferenceDate] - (60 * 60 * 24));
+	NSInteger unlockPeriod = 60 * 60 * 24;  //One day worth of seconds
+	return [[NSUserDefaults standardUserDefaults] integerForKey:@"settingsUnlockedTimestamp"] > ([NSDate timeIntervalSinceReferenceDate] - unlockPeriod);
 }
 
 #pragma mark - Vungle Helper Methods
@@ -241,6 +249,7 @@
 	[playAdOptions setObject:[NSNumber numberWithBool:YES] forKey:VunglePlayAdOptionKeyIncentivized];
 	
 	NSError *sdkError;
+	[VungleSDK sharedSDK].incentivizedAlertText = @"Closing the video early will leave Settings locked.  Are you sure you don't want to continue?";
 	[[VungleSDK sharedSDK] playAd:self withOptions:playAdOptions error:&sdkError];
 	if (sdkError) {
 		NSLog(@"Error encountered during playAd : %@", sdkError);
