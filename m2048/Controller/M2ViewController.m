@@ -247,9 +247,14 @@
 	NSMutableDictionary *playAdOptions = [[NSMutableDictionary alloc] init];
 	//Marks this play as an incentivized view
 	[playAdOptions setObject:[NSNumber numberWithBool:YES] forKey:VunglePlayAdOptionKeyIncentivized];
-	
+	//Update Incentivized Alert Title
+	[playAdOptions setObject:@"Wait!" forKey:VunglePlayAdOptionKeyIncentivizedAlertTitleText];
+	//Update Incentivzed Alert Button Text
+	[playAdOptions setObject:@"Continue?" forKey:VunglePlayAdOptionKeyIncentivizedAlertContinueButtonText];
+	[playAdOptions setObject:@"Close" forKey:VunglePlayAdOptionKeyIncentivizedAlertCloseButtonText];
+	//Update Alert Body Text
+	[playAdOptions setObject:@"Closing the video early will leave Settings locked.  Are you sure you don't want to continue?" forKey:VunglePlayAdOptionKeyIncentivizedAlertBodyText];
 	NSError *sdkError;
-	[VungleSDK sharedSDK].incentivizedAlertText = @"Closing the video early will leave Settings locked.  Are you sure you don't want to continue?";
 	[[VungleSDK sharedSDK] playAd:self withOptions:playAdOptions error:&sdkError];
 	if (sdkError) {
 		NSLog(@"Error encountered during playAd : %@", sdkError);
